@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Appudit</string>
+    <string name="Norm">Norm</string>
+    <string name="norm_code">Norm code</string>
+    <string name="version_norm">Version Norm</string>
+    <string name="definition">Definition</string>
+    <string name="select">SELECT</string>
 </resources>

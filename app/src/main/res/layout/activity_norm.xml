@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.norm.NormActivity">
+
+    <TextView
+        android:id="@+id/tvTittleNorm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/Norm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <Spinner
+        android:id="@+id/spNormsList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTittleNorm"/>
+    <TextView
+        android:id="@+id/tvTittleNormCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/norm_code"
+        app:layout_constraintEnd_toEndOf="@+id/spNormsList"
+        app:layout_constraintStart_toStartOf="@+id/spNormsList"
+        app:layout_constraintTop_toBottomOf="@+id/spNormsList"/>
+    <TextView
+        android:id="@+id/tvNormCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="51413215678941"
+        app:layout_constraintStart_toStartOf="@+id/spNormsList"
+        app:layout_constraintTop_toBottomOf="@+id/tvTittleNormCode"/>
+    <TextView
+        android:id="@+id/tvTittleNormVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/version_norm"
+        app:layout_constraintEnd_toEndOf="@+id/tvTittleNormCode"
+        app:layout_constraintStart_toStartOf="@+id/tvTittleNormCode"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormCode"/>
+    <TextView
+        android:id="@+id/tvNormVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Version: 1.0.1"
+        app:layout_constraintStart_toStartOf="@+id/spNormsList"
+        app:layout_constraintTop_toBottomOf="@+id/tvTittleNormVersion"/>
+    <TextView
+        android:id="@+id/tvTittleNormDefinition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/definition"
+        app:layout_constraintEnd_toEndOf="@+id/tvTittleNormVersion"
+        app:layout_constraintStart_toStartOf="@+id/tvTittleNormVersion"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormVersion"/>
+    <TextView
+        android:id="@+id/tvNormDefinition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="this is a definition of the norm"
+        app:layout_constraintStart_toStartOf="@+id/spNormsList"
+        app:layout_constraintTop_toBottomOf="@+id/tvTittleNormDefinition"/>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/select"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormDefinition" app:layout_constraintVertical_bias="1.0"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
