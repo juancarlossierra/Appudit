@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -32,6 +33,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
+            android:selectedItemPosition="@={viewmodel.selectedItemPosition}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -128,9 +130,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/select"
+            android:onClick="@{() -> viewmodel.selectStandard()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textView8"
-            app:layout_constraintStart_toStartOf="@+id/textView8"/>
+            app:layout_constraintStart_toStartOf="@+id/textView8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

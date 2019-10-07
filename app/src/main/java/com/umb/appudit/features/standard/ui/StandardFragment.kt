@@ -27,8 +27,10 @@ class StandardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = DataBindingUtil.inflate(inflater, R.layout.standard_fragment, container,
-            false)
+        viewDataBinding = DataBindingUtil.inflate(
+            inflater, R.layout.standard_fragment, container,
+            false
+        )
         return viewDataBinding.root
     }
 
@@ -36,23 +38,20 @@ class StandardFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(StandardViewModel::class.java)
         viewDataBinding.viewmodel = viewModel
-
+        viewDataBinding.lifecycleOwner = this
         //first spinner´s configuration
+        viewModel.start()
         viewModel.fetchSpinnerNoRecuerdo().observe(this, Observer { spinnerData ->
-            val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
+            val spinnerAdapter =
+                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
             viewDataBinding.spinner.adapter = spinnerAdapter
         })
 
         //second spinner´s configuration
         viewModel.fetchSpinnerStandard().observe(this, Observer { spinnerData ->
-            val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
+            val spinnerAdapter =
+                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
             viewDataBinding.spinner2.adapter = spinnerAdapter
         })
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.start()
     }
 }

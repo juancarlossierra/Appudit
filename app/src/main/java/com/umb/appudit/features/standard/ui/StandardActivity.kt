@@ -3,7 +3,6 @@ package com.umb.appudit.features.standard.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.umb.appudit.R
-import com.umb.appudit.features.standard.ui.StandardFragment
 
 class StandardActivity : AppCompatActivity() {
 
