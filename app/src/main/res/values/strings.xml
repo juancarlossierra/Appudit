@@ -5,4 +5,9 @@
     <string name="version_norm">Version Norm</string>
     <string name="definition">Definition</string>
     <string name="select">SELECT</string>
+    <string name="noRecuerdo">No recuerdo</string>
+    <string name="standard">Standard</string>
+    <string name="standardCode">Standard Code</string>
+    <string name="standardVersion">Standard version</string>
+    <string name="prueba">Standard version %d</string>
 </resources>
