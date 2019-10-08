@@ -29,27 +29,24 @@ class StandardViewModel(aplication: Application) : AndroidViewModel(aplication) 
     var selectedItemPosition = MutableLiveData<Int>().value
         set(value) {
             field = value
-            val itemSelected = list[field!!]
+            val itemSelected = standardItems[field!!]
             _StandardCode.value = itemSelected.code
             _StandardVersion.value = itemSelected.version
             _Definition.value = itemSelected.definition
         }
 
-    private val _NoRecuedo = MutableLiveData<List<Standard>>()
-    var list = ArrayList<Standard>()
+    private val _StandardItems = MutableLiveData<List<Standard>>()
+    var standardItems = ArrayList<Standard>()
 
-
-    private val _StandardItems = MutableLiveData<List<String>>()
-    val standardItems = ArrayList<String>()
 
     fun start() {
         repository = StandardRepository.getInstance(getApplication())
 //        repository?.escribirDataNueva()
         val callback = object : StandardDataSource.GetDataCallback {
             override fun getDataSuceSuccessfully(data: ArrayList<Standard>) {
-                list.clear()
+                standardItems.clear()
                 data.forEach { a ->
-                    list.add(a)
+                    standardItems.add(a)
                 }
             }
 
@@ -61,18 +58,13 @@ class StandardViewModel(aplication: Application) : AndroidViewModel(aplication) 
         repository?.getStandards(callback)
     }
 
-    fun fetchSpinnerNoRecuerdo(): LiveData<List<Standard>> {
-        _NoRecuedo.value = list
-        return _NoRecuedo
-    }
-
-    fun fetchSpinnerStandard(): LiveData<List<String>> {
+    fun fetchSpinnerStandard(): LiveData<List<Standard>> {
         _StandardItems.value = standardItems
         return _StandardItems
     }
 
-    fun selectStandard(){
-
+    fun getSelectStandard():String{
+        return standardItems[this.selectedItemPosition!!].id.toString()
     }
 
 }

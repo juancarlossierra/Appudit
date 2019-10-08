@@ -1,5 +1,6 @@
 package com.umb.appudit.features.standard.ui
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.umb.appudit.R
 import com.umb.appudit.databinding.StandardFragmentBinding
+import com.umb.appudit.features.Evaluation.ui.EvaluationActivity
 import com.umb.appudit.features.standard.ui.viewmodel.StandardViewModel
 
 class StandardFragment : Fragment() {
@@ -41,17 +43,23 @@ class StandardFragment : Fragment() {
         viewDataBinding.lifecycleOwner = this
         //first spinner´s configuration
         viewModel.start()
-        viewModel.fetchSpinnerNoRecuerdo().observe(this, Observer { spinnerData ->
-            val spinnerAdapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
-            viewDataBinding.spinner.adapter = spinnerAdapter
-        })
 
         //second spinner´s configuration
         viewModel.fetchSpinnerStandard().observe(this, Observer { spinnerData ->
             val spinnerAdapter =
                 ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
-            viewDataBinding.spinner2.adapter = spinnerAdapter
+            viewDataBinding.spinner.adapter = spinnerAdapter
         })
+
+        viewDataBinding.button.setOnClickListener { v ->
+            selectStandard()
+        }
     }
+
+    fun selectStandard() {
+        val intent = Intent(context, EvaluationActivity::class.java)
+        intent.putExtra("selectedStandard",viewModel.getSelectStandard())
+        startActivity(intent)
+    }
+
 }

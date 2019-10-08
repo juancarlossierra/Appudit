@@ -10,4 +10,8 @@
     <string name="standardCode">Standard Code</string>
     <string name="standardVersion">Standard version</string>
     <string name="prueba">Standard version %d</string>
+    <string name="cancel">SELECT</string>
+    <string name="back"><![CDATA[<]]></string>
+    <string name="next"><![CDATA[>]]></string>
+    <string name="send">SEND</string>
 </resources>
