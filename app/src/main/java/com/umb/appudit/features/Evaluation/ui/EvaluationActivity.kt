@@ -18,8 +18,6 @@ class EvaluationActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(EvaluationViewModel::class.java)
 
         val dato = intent.getStringExtra("selectedStandard")
-        Log.d("prueba",dato+" "+viewModel.prueba())
-
 
     }
 
