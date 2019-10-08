@@ -19,6 +19,7 @@ class EvaluationActivity : AppCompatActivity() {
 
         val dato = intent.getStringExtra("selectedStandard")
 
+
     }
 
 }
