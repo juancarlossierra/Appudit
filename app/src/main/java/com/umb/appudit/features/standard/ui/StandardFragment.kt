@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.umb.appudit.R
@@ -41,19 +42,21 @@ class StandardFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(StandardViewModel::class.java)
         viewDataBinding.viewmodel = viewModel
         viewDataBinding.lifecycleOwner = this
-        //first spinner´s configuration
-        viewModel.start()
 
-        //second spinner´s configuration
+//        spinner´s configuration
         viewModel.fetchSpinnerStandard().observe(this, Observer { spinnerData ->
             val spinnerAdapter =
                 ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerData)
             viewDataBinding.spinner.adapter = spinnerAdapter
         })
-
         viewDataBinding.button.setOnClickListener { v ->
             selectStandard()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.start()
     }
 
     fun selectStandard() {

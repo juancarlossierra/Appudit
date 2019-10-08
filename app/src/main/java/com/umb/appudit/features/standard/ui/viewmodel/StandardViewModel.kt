@@ -41,7 +41,6 @@ class StandardViewModel(aplication: Application) : AndroidViewModel(aplication) 
 
     fun start() {
         repository = StandardRepository.getInstance(getApplication())
-//        repository?.escribirDataNueva()
         val callback = object : StandardDataSource.GetDataCallback {
             override fun getDataSuceSuccessfully(data: ArrayList<Standard>) {
                 standardItems.clear()
@@ -54,7 +53,6 @@ class StandardViewModel(aplication: Application) : AndroidViewModel(aplication) 
                 Toast.makeText(getApplication(), "Error to get data", Toast.LENGTH_SHORT).show()
             }
         }
-        Log.d("prueba", "inicializacion")
         repository?.getStandards(callback)
     }
 
