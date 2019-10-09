@@ -1,4 +1,4 @@
-package com.umb.appudit.features.Evaluation.data
+package com.umb.appudit.features.evaluation.data
 
 interface EvaluationDataSource {
 

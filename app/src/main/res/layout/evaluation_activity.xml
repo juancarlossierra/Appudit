@@ -3,6 +3,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewmodel"
+            type="com.umb.appudit.features.evaluation.ui.viewmodel.EvaluationViewModel"/>
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/evaluation"
         android:layout_width="match_parent"
@@ -19,7 +27,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <Spinner
             android:id="@+id/spinner3"
@@ -28,7 +36,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/spinner2"
             app:layout_constraintStart_toStartOf="@+id/spinner2"
-            app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner2"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -38,17 +46,18 @@
             android:text="@string/evidence"
             app:layout_constraintEnd_toEndOf="@+id/spinner3"
             app:layout_constraintStart_toStartOf="@+id/spinner3"
-            app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner3"/>
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:text="texto de la evidencia "
+            android:text="@{viewmodel.evidence}"
             app:layout_constraintEnd_toEndOf="@+id/spinner3"
             app:layout_constraintStart_toStartOf="@+id/spinner3"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:text="text of the evidence"/>
 
         <TextView
             android:id="@+id/textView10"
@@ -58,17 +67,18 @@
             android:text="@string/keyActiviry"
             app:layout_constraintEnd_toEndOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            app:layout_constraintTop_toBottomOf="@+id/textView9"/>
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            tools:text="texto de la actividad clave"
+            android:text="@{viewmodel.keyActivity}"
             app:layout_constraintEnd_toEndOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            tools:text="text of the hey activity"/>
 
         <TextView
             android:id="@+id/textView12"
@@ -78,17 +88,18 @@
             android:text="@string/thoughtCategory"
             app:layout_constraintEnd_toEndOf="@+id/textView11"
             app:layout_constraintStart_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/textView11"/>
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:text="texto de la categoria del pensamiento"
+            android:text="@{viewmodel.thoughtCategory}"
             app:layout_constraintEnd_toEndOf="@+id/textView11"
             app:layout_constraintStart_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/textView12"
+            tools:text="text of the category of thougth"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -117,7 +128,7 @@
                         android:text="@string/question"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <TextView
                         android:id="@+id/textView15"
@@ -125,12 +136,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
                         android:layout_marginTop="8dp"
-                        android:gravity="center_horizontal"
                         android:layout_marginEnd="100dp"
-                        tools:text="quenstion's body"
+                        android:gravity="center_horizontal"
+                        android:text="@{viewmodel.question}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView14"
+                        tools:text="quenstion's body"/>
 
                     <Button
                         android:id="@+id/button2"
@@ -139,7 +151,7 @@
                         android:text="@string/back"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <Button
                         android:id="@+id/button3"
@@ -148,7 +160,7 @@
                         android:text="@string/next"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <RadioGroup
                         android:layout_width="wrap_content"
@@ -164,25 +176,29 @@
                             android:id="@+id/radioButton4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="answer one" />
+                            android:text="@{viewmodel.optionOne}"
+                            tools:text="answer one"/>
 
                         <RadioButton
                             android:id="@+id/radioButton3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="answer two" />
+                            android:text="@{viewmodel.optionTwo}"
+                            tools:text="answer two"/>
 
                         <RadioButton
                             android:id="@+id/radioButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="answer three" />
+                            android:text="@{viewmodel.optionThree}"
+                            tools:text="answer three"/>
 
                         <RadioButton
                             android:id="@+id/radioButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="answer four" />
+                            android:text="@{viewmodel.optionFour}"
+                            tools:text="answer four"/>
                     </RadioGroup>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -197,7 +213,7 @@
             android:text="@string/send"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
-            app:layout_constraintStart_toStartOf="@+id/cardView" />
+            app:layout_constraintStart_toStartOf="@+id/cardView"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

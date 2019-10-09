@@ -1,4 +1,4 @@
-package com.umb.appudit.features.Evaluation.data.entities
+package com.umb.appudit.features.evaluation.data.entities
 
 class Question {
 
@@ -7,5 +7,7 @@ class Question {
     var options: List<String>? = null
 
     var answer: Int? = null
+
+    var asnwerSelected: Int? = null
 
 }

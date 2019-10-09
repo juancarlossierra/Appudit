@@ -8,12 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.umb.appudit.R
 import com.umb.appudit.databinding.StandardFragmentBinding
-import com.umb.appudit.features.Evaluation.ui.EvaluationActivity
+import com.umb.appudit.features.evaluation.ui.EvaluationActivity
 import com.umb.appudit.features.standard.ui.viewmodel.StandardViewModel
 
 class StandardFragment : Fragment() {

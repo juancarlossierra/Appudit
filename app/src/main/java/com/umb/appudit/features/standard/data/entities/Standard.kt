@@ -1,6 +1,6 @@
 package com.umb.appudit.features.standard.data.entities
 
-import com.umb.appudit.features.Evaluation.data.entities.EssentialKnowledge
+import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
 
 class Standard {
 
