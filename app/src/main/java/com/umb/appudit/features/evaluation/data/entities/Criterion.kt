@@ -4,7 +4,7 @@ class Criterion {
 
     var description: String? = null
 
-    var evidencia: String? = null
+    var evidence: String? = null
 
     var keyActivity: String? = null
 

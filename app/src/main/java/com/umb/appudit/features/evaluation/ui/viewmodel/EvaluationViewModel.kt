@@ -1,6 +1,7 @@
 package com.umb.appudit.features.evaluation.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -55,24 +56,48 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         return _EssentialKnowledgeItems
     }
 
+    var selectedItemPositionEsentials = MutableLiveData<Int>().value
+        set(value) {
+            field = value
+            val selectedItem = knowledge?.essentialKnowledges?.get(field!!)
+            _CriterionItems.value = selectedItem?.criterion
+        }
+
     private val _CriterionItems = MutableLiveData<List<Criterion>>()
     fun fetchSpinnerCriterionItems(): LiveData<List<Criterion>> {
         _CriterionItems.value = knowledge?.essentialKnowledges?.get(0)?.criterion
         return _CriterionItems
     }
 
-    //var selectedItemPosition = MutableLiveData<Int>()
+    var selectedItemPositionCritetions = MutableLiveData<Int>().value
+        set(value) {
+            field = value
+            val selectedItem =
+                knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(field!!)
+            _Evidence.value = selectedItem?.evidence
+            _KeyActivity.value = selectedItem?.keyActivity
+            _ThoughtCategory.value = selectedItem?.thoughtCategory
+            val question = selectedItem?.questions?.get(questionPosition!!)
+            _Question.value = question?.body
+            _OptionOne.value = question?.options?.get(0)
+            _OptionTwo.value = question?.options?.get(1)
+            _OptionThree.value = question?.options?.get(2)
+            _OptionFour.value = question?.options?.get(3)
+        }
+
+    private var questionPosition: Int? = null
 
     init {
         evaluationRepository = EvaluationRepository.getInstance(getApplication())
         loadTestData()
+        questionPosition = 0
+
     }
 
-
     fun loadTestData() {
-        val question = Question()
+        var question = Question()
         question.body = "question number one"
-        val options = ArrayList<String>()
+        var options = ArrayList<String>()
         options.add("correct option")
         options.add("option two")
         options.add("option three")
@@ -81,39 +106,95 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         question.answer = 0
         val questions = ArrayList<Question>()
         questions.add(question)
-        options[0] = "option one"
-        options[1] = "correct option"
+
+        question = Question()
+        question.body = "question number one"
+        options = ArrayList<String>()
+        options.add("option one")
+        options.add("correct option")
+        options.add("option three")
+        options.add("option four")
         question.options = options
         question.answer = 1
         questions.add(question)
-        options[1] = "option two"
-        options[2] = "correct option"
+
+        question = Question()
+        question.body = "question number one"
+        options = ArrayList<String>()
+        options.add("option one")
+        options.add("option two")
+        options.add("correct option")
+        options.add("option four")
         question.options = options
         question.answer = 2
         questions.add(question)
 
         val criterions = ArrayList<Criterion>()
-        val criterion = Criterion()
-        criterion.evidencia = "Content of the evidence"
+        var criterion = Criterion()
+        criterion.evidence = "Content of the evidence"
         criterion.keyActivity = "Content of the key activity"
         criterion.thoughtCategory = "Content of the thougth category"
         criterion.questions = questions
         criterion.description = "criterion 1"
         criterions.add(criterion)
+
+        criterion = Criterion()
+        criterion.evidence = "Content of the evidence"
+        criterion.keyActivity = "Content of the key activity"
+        criterion.thoughtCategory = "Content of the thougth category"
+        criterion.questions = questions
         criterion.description = "criterion 2"
         criterions.add(criterion)
+
+        criterion = Criterion()
+        criterion.evidence = "Content of the evidence"
+        criterion.keyActivity = "Content of the key activity"
+        criterion.thoughtCategory = "Content of the thougth category"
+        criterion.questions = questions
         criterion.description = "criterion 3"
         criterions.add(criterion)
 
-        val essentialKnowledge = EssentialKnowledge()
+        val criterions2 = ArrayList<Criterion>()
+        criterion = Criterion()
+        criterion.evidence = "Content of the evidence"
+        criterion.keyActivity = "Content of the key activity"
+        criterion.thoughtCategory = "Content of the thougth category"
+        criterion.questions = questions
+        criterion.description = "criterion 4"
+        criterions2.add(criterion)
+
+        criterion = Criterion()
+        criterion.evidence = "Content of the evidence"
+        criterion.keyActivity = "Content of the key activity"
+        criterion.thoughtCategory = "Content of the thougth category"
+        criterion.questions = questions
+        criterion.description = "criterion 5"
+        criterions2.add(criterion)
+
+        criterion = Criterion()
+        criterion.evidence = "Content of the evidence"
+        criterion.keyActivity = "Content of the key activity"
+        criterion.thoughtCategory = "Content of the thougth category"
+        criterion.questions = questions
+        criterion.description = "criterion 6"
+        criterions2.add(criterion)
+
+        var essentialKnowledge = EssentialKnowledge()
         essentialKnowledge.description = "Essential knowledge one"
         essentialKnowledge.criterion = criterions
         val essentialKnowledges = ArrayList<EssentialKnowledge>()
         essentialKnowledges.add(essentialKnowledge)
+        essentialKnowledge = EssentialKnowledge()
         essentialKnowledge.description = "Essential knowledge two"
+        essentialKnowledge.criterion = criterions2
         essentialKnowledges.add(essentialKnowledge)
 
         knowledge = Knowledge()
         knowledge!!.essentialKnowledges = essentialKnowledges
+    }
+
+    fun testButton() {
+        _Question.value = "this is fine"
+        _Evidence.value = "this is fine"
     }
 }

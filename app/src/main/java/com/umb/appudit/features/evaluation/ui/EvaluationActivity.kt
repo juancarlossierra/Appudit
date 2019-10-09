@@ -19,7 +19,7 @@ class EvaluationActivity : AppCompatActivity() {
         setContentView(viewDataBinding.root)
 
         viewDataBinding.viewmodel = ViewModelProviders.of(this).get(EvaluationViewModel::class.java)
-
+        viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewmodel!!.fetchSpinnerEssentialKnowledge().observe(this, Observer { spinnerData ->
             val spinnerAdapter =
                 ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, spinnerData)
@@ -32,8 +32,6 @@ class EvaluationActivity : AppCompatActivity() {
         })
 
         //val dato = intent.getStringExtra("selectedStandard")
-
-
     }
 
 }
