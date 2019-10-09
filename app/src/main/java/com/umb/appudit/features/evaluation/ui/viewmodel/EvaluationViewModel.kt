@@ -77,7 +77,8 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
             _Evidence.value = selectedItem?.evidence
             _KeyActivity.value = selectedItem?.keyActivity
             _ThoughtCategory.value = selectedItem?.thoughtCategory
-            val question = selectedItem?.questions?.get(questionPosition!!)
+            questions = selectedItem?.questions
+            val question = questions?.get(questionPosition!!)
             _Question.value = question?.body
             _OptionOne.value = question?.options?.get(0)
             _OptionTwo.value = question?.options?.get(1)
@@ -87,11 +88,36 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
 
     private var questionPosition: Int? = null
 
+    private var questions: List<Question>? = null
+
     init {
         evaluationRepository = EvaluationRepository.getInstance(getApplication())
         loadTestData()
         questionPosition = 0
+    }
 
+    fun previousQuestion() {
+        if (questionPosition!! > 0) {
+            questionPosition = questionPosition!! - 1
+            val question = questions?.get(questionPosition!!)
+            _Question.value = question?.body
+            _OptionOne.value = question?.options?.get(0)
+            _OptionTwo.value = question?.options?.get(1)
+            _OptionThree.value = question?.options?.get(2)
+            _OptionFour.value = question?.options?.get(3)
+        }
+    }
+
+    fun nextQuestion() {
+        if (questionPosition!! < questions?.size!!-1) {
+            questionPosition = questionPosition!! + 1
+            val question = questions?.get(questionPosition!!)
+            _Question.value = question?.body
+            _OptionOne.value = question?.options?.get(0)
+            _OptionTwo.value = question?.options?.get(1)
+            _OptionThree.value = question?.options?.get(2)
+            _OptionFour.value = question?.options?.get(3)
+        }
     }
 
     fun loadTestData() {
@@ -108,7 +134,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         questions.add(question)
 
         question = Question()
-        question.body = "question number one"
+        question.body = "question number two"
         options = ArrayList<String>()
         options.add("option one")
         options.add("correct option")
@@ -119,7 +145,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         questions.add(question)
 
         question = Question()
-        question.body = "question number one"
+        question.body = "question number three"
         options = ArrayList<String>()
         options.add("option one")
         options.add("option two")
@@ -191,10 +217,5 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
 
         knowledge = Knowledge()
         knowledge!!.essentialKnowledges = essentialKnowledges
-    }
-
-    fun testButton() {
-        _Question.value = "this is fine"
-        _Evidence.value = "this is fine"
     }
 }

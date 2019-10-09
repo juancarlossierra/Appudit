@@ -150,6 +150,7 @@
                         android:id="@+id/button2"
                         android:layout_width="30dp"
                         android:layout_height="0dp"
+                        android:onClick="@{() -> viewmodel.previousQuestion()}"
                         android:text="@string/back"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -159,6 +160,7 @@
                         android:id="@+id/button3"
                         android:layout_width="30dp"
                         android:layout_height="0dp"
+                        android:onClick="@{() -> viewmodel.nextQuestion()}"
                         android:text="@string/next"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -213,7 +215,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/send"
-            android:onClick="@{() -> viewmodel.testButton()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
             app:layout_constraintStart_toStartOf="@+id/cardView"/>
