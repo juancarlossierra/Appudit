@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="TextView"
+            android:text="@string/evidence"
             app:layout_constraintEnd_toEndOf="@+id/spinner3"
             app:layout_constraintStart_toStartOf="@+id/spinner3"
             app:layout_constraintTop_toBottomOf="@+id/spinner3" />
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="TextView"
+            tools:text="texto de la evidencia "
             app:layout_constraintEnd_toEndOf="@+id/spinner3"
             app:layout_constraintStart_toStartOf="@+id/spinner3"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="@string/keyActiviry"
             app:layout_constraintEnd_toEndOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="TextView"
+            tools:text="texto de la actividad clave"
             app:layout_constraintEnd_toEndOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="@string/thoughtCategory"
             app:layout_constraintEnd_toEndOf="@+id/textView11"
             app:layout_constraintStart_toStartOf="@+id/textView11"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -85,7 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="TextView"
+            tools:text="texto de la categoria del pensamiento"
             app:layout_constraintEnd_toEndOf="@+id/textView11"
             app:layout_constraintStart_toStartOf="@+id/textView11"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="TextView"
+                        android:text="@string/question"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -125,8 +125,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="100dp"
                         android:layout_marginTop="8dp"
+                        android:gravity="center_horizontal"
                         android:layout_marginEnd="100dp"
-                        android:text="TextView"
+                        tools:text="quenstion's body"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -163,25 +164,25 @@
                             android:id="@+id/radioButton4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="RadioButton" />
+                            tools:text="answer one" />
 
                         <RadioButton
                             android:id="@+id/radioButton3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="RadioButton" />
+                            tools:text="answer two" />
 
                         <RadioButton
                             android:id="@+id/radioButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="RadioButton" />
+                            tools:text="answer three" />
 
                         <RadioButton
                             android:id="@+id/radioButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="RadioButton" />
+                            tools:text="answer four" />
                     </RadioGroup>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
