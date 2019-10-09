@@ -36,5 +36,4 @@ class EvaluationRepository : EvaluationDataSource {
         databaseReference = firebaseDatabase?.reference
     }
 
-
 }

@@ -52,6 +52,12 @@ class StandardRepository : StandardDataSource {
     }
 
     override fun escribirDataNueva() {
+
+
+
+
+
+
         var standard = Standard()
         standard.id = UUID.randomUUID().toString()
         standard.name = "estandar 1"

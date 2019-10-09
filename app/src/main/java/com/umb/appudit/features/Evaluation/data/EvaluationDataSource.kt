@@ -6,5 +6,4 @@ interface EvaluationDataSource {
 
     fun addQuestion(body: String, asnwers: ArrayList<String>)
 
-
 }
