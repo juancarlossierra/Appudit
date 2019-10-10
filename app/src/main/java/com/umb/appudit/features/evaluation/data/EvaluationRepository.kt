@@ -30,6 +30,8 @@ class EvaluationRepository : EvaluationDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+
+
     private fun initializeFireBase(context: Context) {
         FirebaseApp.initializeApp(context)
         firebaseDatabase = FirebaseDatabase.getInstance()

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/cancelar_item"
-        android:title="@string/cancel"/>
+        android:id="@+id/add_question"
+        android:title="@string/addNewQuestion"/>
 
 </menu>

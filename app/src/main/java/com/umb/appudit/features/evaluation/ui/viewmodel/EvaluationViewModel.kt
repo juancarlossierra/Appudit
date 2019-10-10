@@ -78,6 +78,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
             _KeyActivity.value = selectedItem?.keyActivity
             _ThoughtCategory.value = selectedItem?.thoughtCategory
             questions = selectedItem?.questions
+            questionPosition = 0
             val question = questions?.get(questionPosition!!)
             _Question.value = question?.body
             _OptionOne.value = question?.options?.get(0)
