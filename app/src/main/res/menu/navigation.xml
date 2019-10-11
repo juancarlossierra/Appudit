@@ -3,6 +3,14 @@
 
     <item
         android:id="@+id/add_question"
-        android:title="@string/addNewQuestion"/>
+        android:title="@string/addNewQuestion" />
+
+    <item
+        android:id="@+id/edit_question"
+        android:title="@string/editQuestion" />
+
+    <item
+        android:id="@+id/delete_question"
+        android:title="@string/deleteQuestion" />
 
 </menu>

@@ -1,7 +1,7 @@
 package com.umb.appudit.features.evaluation.ui.viewmodel
 
 import android.app.Application
-import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +11,8 @@ import com.umb.appudit.features.evaluation.data.entities.Criterion
 import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
 import com.umb.appudit.features.evaluation.data.entities.Knowledge
 import com.umb.appudit.features.evaluation.data.entities.Question
+import com.umb.appudit.features.evaluation.ui.QuestionDialog
+import com.umb.appudit.features.evaluation.ui.QuestionDialog2
 
 class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication) {
 
@@ -73,7 +75,8 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         set(value) {
             field = value
             val selectedItem =
-                knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(field!!)
+                knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)
+                    ?.criterion?.get(field!!)
             _Evidence.value = selectedItem?.evidence
             _KeyActivity.value = selectedItem?.keyActivity
             _ThoughtCategory.value = selectedItem?.thoughtCategory
@@ -93,8 +96,19 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
 
     init {
         evaluationRepository = EvaluationRepository.getInstance(getApplication())
-        loadTestData()
         questionPosition = 0
+        val callback = object : EvaluationDataSource.Callback {
+            override fun getDataSuccessful(knowledgef: Knowledge) {
+                knowledge = knowledgef
+            }
+
+            override fun getDataError() {
+                Toast.makeText(getApplication(), "Error al cargar los datos", Toast.LENGTH_LONG)
+                    .show()
+            }
+
+        }
+        evaluationRepository?.getData("2", callback)
     }
 
     fun previousQuestion() {
@@ -110,7 +124,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
     }
 
     fun nextQuestion() {
-        if (questionPosition!! < questions?.size!!-1) {
+        if (questionPosition!! < questions?.size!! - 1) {
             questionPosition = questionPosition!! + 1
             val question = questions?.get(questionPosition!!)
             _Question.value = question?.body
@@ -121,102 +135,8 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         }
     }
 
-    fun loadTestData() {
-        var question = Question()
-        question.body = "question number one"
-        var options = ArrayList<String>()
-        options.add("correct option")
-        options.add("option two")
-        options.add("option three")
-        options.add("option four")
-        question.options = options
-        question.answer = 0
-        val questions = ArrayList<Question>()
-        questions.add(question)
-
-        question = Question()
-        question.body = "question number two"
-        options = ArrayList<String>()
-        options.add("option one")
-        options.add("correct option")
-        options.add("option three")
-        options.add("option four")
-        question.options = options
-        question.answer = 1
-        questions.add(question)
-
-        question = Question()
-        question.body = "question number three"
-        options = ArrayList<String>()
-        options.add("option one")
-        options.add("option two")
-        options.add("correct option")
-        options.add("option four")
-        question.options = options
-        question.answer = 2
-        questions.add(question)
-
-        val criterions = ArrayList<Criterion>()
-        var criterion = Criterion()
-        criterion.evidence = "Content of the evidence"
-        criterion.keyActivity = "Content of the key activity"
-        criterion.thoughtCategory = "Content of the thougth category"
-        criterion.questions = questions
-        criterion.description = "criterion 1"
-        criterions.add(criterion)
-
-        criterion = Criterion()
-        criterion.evidence = "Content of the evidence"
-        criterion.keyActivity = "Content of the key activity"
-        criterion.thoughtCategory = "Content of the thougth category"
-        criterion.questions = questions
-        criterion.description = "criterion 2"
-        criterions.add(criterion)
-
-        criterion = Criterion()
-        criterion.evidence = "Content of the evidence"
-        criterion.keyActivity = "Content of the key activity"
-        criterion.thoughtCategory = "Content of the thougth category"
-        criterion.questions = questions
-        criterion.description = "criterion 3"
-        criterions.add(criterion)
-
-        val criterions2 = ArrayList<Criterion>()
-        criterion = Criterion()
-        criterion.evidence = "Content of the evidence"
-        criterion.keyActivity = "Content of the key activity"
-        criterion.thoughtCategory = "Content of the thougth category"
-        criterion.questions = questions
-        criterion.description = "criterion 4"
-        criterions2.add(criterion)
-
-        criterion = Criterion()
-        criterion.evidence = "Content of the evidence"
-        criterion.keyActivity = "Content of the key activity"
-        criterion.thoughtCategory = "Content of the thougth category"
-        criterion.questions = questions
-        criterion.description = "criterion 5"
-        criterions2.add(criterion)
-
-        criterion = Criterion()
-        criterion.evidence = "Content of the evidence"
-        criterion.keyActivity = "Content of the key activity"
-        criterion.thoughtCategory = "Content of the thougth category"
-        criterion.questions = questions
-        criterion.description = "criterion 6"
-        criterions2.add(criterion)
-
-        var essentialKnowledge = EssentialKnowledge()
-        essentialKnowledge.description = "Essential knowledge one"
-        essentialKnowledge.criterion = criterions
-        val essentialKnowledges = ArrayList<EssentialKnowledge>()
-        essentialKnowledges.add(essentialKnowledge)
-        essentialKnowledge = EssentialKnowledge()
-        essentialKnowledge.description = "Essential knowledge two"
-        essentialKnowledge.criterion = criterions2
-        essentialKnowledges.add(essentialKnowledge)
-
-        knowledge = Knowledge()
-        knowledge!!.essentialKnowledges = essentialKnowledges
+    fun deleteQuestion() {
+        evaluationRepository?.deleteQuestion()
     }
+
 }

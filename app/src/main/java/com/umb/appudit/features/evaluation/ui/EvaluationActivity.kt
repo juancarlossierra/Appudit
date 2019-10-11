@@ -22,17 +22,26 @@ class EvaluationActivity : AppCompatActivity() {
 
         viewDataBinding.viewmodel = ViewModelProviders.of(this).get(EvaluationViewModel::class.java)
         viewDataBinding.lifecycleOwner = this
-        viewDataBinding.viewmodel!!.fetchSpinnerEssentialKnowledge().observe(this, Observer { spinnerData ->
-            val spinnerAdapter =
-                ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, spinnerData)
-            viewDataBinding.spinner2.adapter = spinnerAdapter
-        })
-        viewDataBinding.viewmodel!!.fetchSpinnerCriterionItems().observe(this, Observer { spinnerData ->
-            val spinnerAdapter =
-                ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, spinnerData)
-            viewDataBinding.spinner3.adapter = spinnerAdapter
-        })
-
+        viewDataBinding.viewmodel!!.fetchSpinnerEssentialKnowledge()
+            .observe(this, Observer { spinnerData ->
+                val spinnerAdapter =
+                    ArrayAdapter(
+                        applicationContext,
+                        android.R.layout.simple_spinner_item,
+                        spinnerData
+                    )
+                viewDataBinding.spinner2.adapter = spinnerAdapter
+            })
+        viewDataBinding.viewmodel!!.fetchSpinnerCriterionItems()
+            .observe(this, Observer { spinnerData ->
+                val spinnerAdapter =
+                    ArrayAdapter(
+                        applicationContext,
+                        android.R.layout.simple_spinner_item,
+                        spinnerData
+                    )
+                viewDataBinding.spinner3.adapter = spinnerAdapter
+            })
         //val dato = intent.getStringExtra("selectedStandard")
     }
 
@@ -42,6 +51,12 @@ class EvaluationActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add_question -> addQuestion()
+            R.id.edit_question -> editQuestion()
+            R.id.delete_question -> deleteQuestion()
+        }
+
         if (item.itemId == R.id.add_question) {
 
         }
@@ -49,6 +64,14 @@ class EvaluationActivity : AppCompatActivity() {
     }
 
     fun addQuestion() {
+        var questionDialog= QuestionDialog(this,"ADD")
+    }
 
+    fun editQuestion() {
+
+    }
+
+    fun deleteQuestion() {
+        viewDataBinding.viewmodel?.deleteQuestion()
     }
 }

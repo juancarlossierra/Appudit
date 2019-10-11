@@ -18,4 +18,22 @@
     <string name="keyActiviry">Key activity</string>
     <string name="thoughtCategory">Category of thought</string>
     <string name="question">Question</string>
+    <string name="editQuestion">Edit question</string>
+    <string name="deleteQuestion">Delete question</string>
+    <string name="cancel">Cancel</string>
+    <string name="firstOption">First option:</string>
+    <string name="secondOption">Second option:</string>
+    <string name="threethOption">Threeth option:</string>
+    <string name="fourthOption">Fourth option:</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="sing">SING IN</string>
+    <string name="register">REGISTER</string>
 </resources>
