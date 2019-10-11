@@ -56,7 +56,6 @@ class EvaluationActivity : AppCompatActivity() {
             R.id.edit_question -> editQuestion()
             R.id.delete_question -> deleteQuestion()
         }
-
         if (item.itemId == R.id.add_question) {
 
         }
@@ -64,11 +63,11 @@ class EvaluationActivity : AppCompatActivity() {
     }
 
     fun addQuestion() {
-        var questionDialog= QuestionDialog(this,"ADD")
+        QuestionDialog(this, QuestionDialog.ADD.ADD, viewDataBinding.viewmodel!!)
     }
 
     fun editQuestion() {
-
+        QuestionDialog(this, QuestionDialog.EDIT.EDIT, viewDataBinding.viewmodel!!)
     }
 
     fun deleteQuestion() {

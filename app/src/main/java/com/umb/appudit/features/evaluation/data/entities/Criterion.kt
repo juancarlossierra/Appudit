@@ -10,7 +10,7 @@ class Criterion {
 
     var thoughtCategory: String? = null
 
-    var questions: List<Question>? = null
+    var questions: MutableList<Question>? = null
 
     override fun toString(): String {
         return description.toString()

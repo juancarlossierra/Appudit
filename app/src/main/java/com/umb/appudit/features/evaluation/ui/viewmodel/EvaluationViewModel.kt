@@ -11,8 +11,6 @@ import com.umb.appudit.features.evaluation.data.entities.Criterion
 import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
 import com.umb.appudit.features.evaluation.data.entities.Knowledge
 import com.umb.appudit.features.evaluation.data.entities.Question
-import com.umb.appudit.features.evaluation.ui.QuestionDialog
-import com.umb.appudit.features.evaluation.ui.QuestionDialog2
 
 class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication) {
 
@@ -98,8 +96,8 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         evaluationRepository = EvaluationRepository.getInstance(getApplication())
         questionPosition = 0
         val callback = object : EvaluationDataSource.Callback {
-            override fun getDataSuccessful(knowledgef: Knowledge) {
-                knowledge = knowledgef
+            override fun getDataSuccessful(knowledge: Knowledge) {
+                this@EvaluationViewModel.knowledge = knowledge
             }
 
             override fun getDataError() {
@@ -112,15 +110,18 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
     }
 
     fun previousQuestion() {
+        val question: Question?
         if (questionPosition!! > 0) {
             questionPosition = questionPosition!! - 1
-            val question = questions?.get(questionPosition!!)
-            _Question.value = question?.body
-            _OptionOne.value = question?.options?.get(0)
-            _OptionTwo.value = question?.options?.get(1)
-            _OptionThree.value = question?.options?.get(2)
-            _OptionFour.value = question?.options?.get(3)
+            question = questions?.get(questionPosition!!)
+        } else {
+            question = questions?.get(0)
         }
+        _Question.value = question?.body
+        _OptionOne.value = question?.options?.get(0)
+        _OptionTwo.value = question?.options?.get(1)
+        _OptionThree.value = question?.options?.get(2)
+        _OptionFour.value = question?.options?.get(3)
     }
 
     fun nextQuestion() {
@@ -136,7 +137,34 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
     }
 
     fun deleteQuestion() {
-        evaluationRepository?.deleteQuestion()
+        knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+            selectedItemPositionCritetions!!
+        )?.questions?.removeAt(questionPosition!!)
+        previousQuestion()
+    }
+
+    fun addQuestion(body: String, options: List<String>) {
+        val questions = knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+            selectedItemPositionCritetions!!
+        )?.questions
+        val question = Question()
+        question.body = body
+        question.options = options
+        questions?.add(question)
+    }
+
+    fun editQuestion(body: String, options: List<String>) {
+        val question = Question()
+        question.body = body
+        question.options = options
+        knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+            selectedItemPositionCritetions!!
+        )?.questions?.set(questionPosition!!, question)
+        _Question.value = question?.body
+        _OptionOne.value = question?.options?.get(0)
+        _OptionTwo.value = question?.options?.get(1)
+        _OptionThree.value = question?.options?.get(2)
+        _OptionFour.value = question?.options?.get(3)
     }
 
 }
