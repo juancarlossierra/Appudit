@@ -2,17 +2,20 @@ package com.umb.appudit.features.evaluation.data
 
 import android.content.Context
 import com.google.firebase.FirebaseApp
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.umb.appudit.features.evaluation.data.entities.Criterion
 import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
 import com.umb.appudit.features.evaluation.data.entities.Knowledge
 import com.umb.appudit.features.evaluation.data.entities.Question
+import com.umb.appudit.features.evaluation.ui.EvaluationActivity
+import com.umb.appudit.features.standard.data.entities.Standard
 
 class EvaluationRepository : EvaluationDataSource {
 
     private var firebaseDatabase: FirebaseDatabase? = null
     private var databaseReference: DatabaseReference? = null
+    private val NODO = "standard"
+    private val TAG = "standard"
 
     var knowledge: Knowledge? = null
 
@@ -29,8 +32,28 @@ class EvaluationRepository : EvaluationDataSource {
     }
 
     override fun getData(id: String, callback: EvaluationDataSource.Callback) {
-        knowledge = loadTestData()
-        callback.getDataSuccessful(knowledge!!)
+        val standards = ArrayList<Standard>()
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataSnapshot.children.forEach { a ->
+                    a.getValue(Standard::class.java)?.let { standards.add(it) }
+                }
+                var standard: Standard? = null
+                for (x: Int in 0..standards.size) {
+                    if (standards[x].id == id) {
+                        standard = standards[x]
+                        break
+                    }
+                }
+                callback.getDataSuccessful(standard!!)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                callback.getDataError()
+            }
+        }
+        databaseReference?.child(NODO)?.addValueEventListener(postListener)
+
     }
 
     override fun addQuestion(body: String, asnwers: ArrayList<String>) {
@@ -150,5 +173,6 @@ class EvaluationRepository : EvaluationDataSource {
         knowledge!!.essentialKnowledges = essentialKnowledges
         return knowledge
     }
+
 
 }

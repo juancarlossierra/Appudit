@@ -1,6 +1,9 @@
 package com.umb.appudit.features.standard.data.entities
 
 import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
+import com.umb.appudit.features.evaluation.data.entities.Knowledge
+import com.umb.appudit.features.evaluation.data.entities.Performance
+import com.umb.appudit.features.evaluation.data.entities.Product
 
 class Standard {
 
@@ -14,7 +17,11 @@ class Standard {
 
     var definition: String? = null
 
-    var essentialKnowledge: EssentialKnowledge? = null
+    var knowledge: Knowledge? = null
+
+    var Product: Product? = null
+
+    var performance: Performance? = null
 
     override fun toString(): String {
         return name.toString()

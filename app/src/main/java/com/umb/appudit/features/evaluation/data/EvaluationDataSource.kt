@@ -1,6 +1,7 @@
 package com.umb.appudit.features.evaluation.data
 
 import com.umb.appudit.features.evaluation.data.entities.Knowledge
+import com.umb.appudit.features.standard.data.entities.Standard
 
 interface EvaluationDataSource {
 
@@ -14,7 +15,7 @@ interface EvaluationDataSource {
 
     interface Callback {
 
-        fun getDataSuccessful(knowledge: Knowledge)
+        fun getDataSuccessful(standard: Standard)
 
         fun getDataError()
 

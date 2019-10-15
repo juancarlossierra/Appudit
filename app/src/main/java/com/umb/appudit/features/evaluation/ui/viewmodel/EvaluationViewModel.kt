@@ -7,16 +7,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.umb.appudit.features.evaluation.data.EvaluationDataSource
 import com.umb.appudit.features.evaluation.data.EvaluationRepository
-import com.umb.appudit.features.evaluation.data.entities.Criterion
-import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
-import com.umb.appudit.features.evaluation.data.entities.Knowledge
-import com.umb.appudit.features.evaluation.data.entities.Question
+import com.umb.appudit.features.evaluation.data.entities.*
+import com.umb.appudit.features.evaluation.ui.EvaluationActivity
+import com.umb.appudit.features.standard.data.entities.Standard
 
 class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication) {
 
     var evaluationRepository: EvaluationDataSource? = null
 
     var knowledge: Knowledge? = null
+
+    var standard: Standard? = null
+
+    private var view: EvaluationActivity? = null
 
     private val _Evidence = MutableLiveData<String>()
     val evidence: LiveData<String>
@@ -96,8 +99,10 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         evaluationRepository = EvaluationRepository.getInstance(getApplication())
         questionPosition = 0
         val callback = object : EvaluationDataSource.Callback {
-            override fun getDataSuccessful(knowledge: Knowledge) {
-                this@EvaluationViewModel.knowledge = knowledge
+            override fun getDataSuccessful(standard: Standard) {
+                this@EvaluationViewModel.standard = standard
+                this@EvaluationViewModel.knowledge = standard.knowledge
+                view?.loadSpinners()
             }
 
             override fun getDataError() {
@@ -106,7 +111,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
             }
 
         }
-        evaluationRepository?.getData("2", callback)
+        evaluationRepository?.getData(EvaluationActivity.id.id, callback)
     }
 
     fun previousQuestion() {
@@ -144,9 +149,10 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
     }
 
     fun addQuestion(body: String, options: List<String>) {
-        val questions = knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
-            selectedItemPositionCritetions!!
-        )?.questions
+        val questions =
+            knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+                selectedItemPositionCritetions!!
+            )?.questions
         val question = Question()
         question.body = body
         question.options = options
@@ -167,4 +173,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         _OptionFour.value = question?.options?.get(3)
     }
 
+    fun setView(view: EvaluationActivity) {
+        this@EvaluationViewModel.view = view
+    }
 }
