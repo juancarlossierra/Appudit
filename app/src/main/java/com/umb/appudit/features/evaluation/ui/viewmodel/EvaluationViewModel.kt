@@ -11,6 +11,9 @@ import com.umb.appudit.features.evaluation.data.EvaluationRepository
 import com.umb.appudit.features.evaluation.data.entities.*
 import com.umb.appudit.features.evaluation.ui.EvaluationActivity
 import com.umb.appudit.features.standard.data.entities.Standard
+import android.widget.RadioGroup
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
 
 class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication) {
 
@@ -212,5 +215,18 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         return essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
             selectedItemPositionCritetions!!
         )?.questions?.get(questionPosition!!)
+    }
+
+    fun onSplitTypeChanged(radioGroup: RadioGroup, id: Int) {
+        Log.i("prueba", "prueba dato " + radioGroup.indexOfChild(radioGroup.findViewById(id)))
+        var question = essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+            selectedItemPositionCritetions!!
+        )?.questions?.get(questionPosition!!)
+        val indx = radioGroup.indexOfChild(radioGroup.findViewById(id))
+        if (question?.answer == indx) {
+            view?.showMessage("correct answer")
+        } else {
+            view?.showMessage("wrong answer")
+        }
     }
 }

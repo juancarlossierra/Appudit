@@ -177,6 +177,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
+                        android:onCheckedChanged="@{viewmodel.onSplitTypeChanged}"
                         app:layout_constraintEnd_toStartOf="@+id/button3"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/button2"
@@ -229,11 +230,11 @@
 
         <Spinner
             android:id="@+id/spinner4"
+            items="aasd,asdasd,asd456"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            items="aasd,asdasd,asd456"
             android:layout_marginEnd="16dp"
             android:selectedItemPosition="@={viewmodel.selectedItemOptcion}"
             app:layout_constraintEnd_toEndOf="parent"
