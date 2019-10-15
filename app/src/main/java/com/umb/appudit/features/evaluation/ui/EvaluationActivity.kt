@@ -31,12 +31,21 @@ class EvaluationActivity : AppCompatActivity() {
         id.id = dato
         viewDataBinding.viewmodel = ViewModelProviders.of(this).get(EvaluationViewModel::class.java)
         viewDataBinding.lifecycleOwner = this
-
         viewmodel = viewDataBinding.viewmodel
         viewmodel?.setView(this)
     }
 
     fun loadSpinners() {
+        viewDataBinding.viewmodel!!.fetchSpinnerOptionsItems()
+            .observe(this, Observer { spinnerData ->
+                val spinnerAdapter =
+                    ArrayAdapter(
+                        applicationContext,
+                        android.R.layout.simple_spinner_item,
+                        spinnerData
+                    )
+                viewDataBinding.spinner4.adapter = spinnerAdapter
+            })
         viewDataBinding.viewmodel!!.fetchSpinnerEssentialKnowledge()
             .observe(this, Observer { spinnerData ->
                 val spinnerAdapter =

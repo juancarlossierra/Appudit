@@ -32,7 +32,7 @@
         android:ems="10"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintStart_toEndOf="@+id/rgOptionGroup"
         app:layout_constraintTop_toBottomOf="@+id/etQuestion"
         tools:ignore="Autofill,LabelFor"/>
 
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnAccept"
         app:layout_constraintTop_toTopOf="@+id/btnAccept"/>
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/rgOptionGroup"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/etOptionFour"

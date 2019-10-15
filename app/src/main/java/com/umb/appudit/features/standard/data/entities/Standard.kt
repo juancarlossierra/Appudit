@@ -19,7 +19,7 @@ class Standard {
 
     var knowledge: Knowledge? = null
 
-    var Product: Product? = null
+    var product: Product? = null
 
     var performance: Performance? = null
 

@@ -1,6 +1,7 @@
 package com.umb.appudit.features.evaluation.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -16,6 +17,8 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
     var evaluationRepository: EvaluationDataSource? = null
 
     var knowledge: Knowledge? = null
+
+    var essentialKnowledges: List<EssentialKnowledge>? = null
 
     var standard: Standard? = null
 
@@ -55,20 +58,20 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
 
     private val _EssentialKnowledgeItems = MutableLiveData<List<EssentialKnowledge>>()
     fun fetchSpinnerEssentialKnowledge(): LiveData<List<EssentialKnowledge>> {
-        _EssentialKnowledgeItems.value = knowledge?.essentialKnowledges
+        _EssentialKnowledgeItems.value = essentialKnowledges
         return _EssentialKnowledgeItems
     }
 
     var selectedItemPositionEsentials = MutableLiveData<Int>().value
         set(value) {
             field = value
-            val selectedItem = knowledge?.essentialKnowledges?.get(field!!)
+            val selectedItem = essentialKnowledges?.get(field!!)
             _CriterionItems.value = selectedItem?.criterion
         }
 
     private val _CriterionItems = MutableLiveData<List<Criterion>>()
     fun fetchSpinnerCriterionItems(): LiveData<List<Criterion>> {
-        _CriterionItems.value = knowledge?.essentialKnowledges?.get(0)?.criterion
+        _CriterionItems.value = essentialKnowledges?.get(0)?.criterion
         return _CriterionItems
     }
 
@@ -76,7 +79,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
         set(value) {
             field = value
             val selectedItem =
-                knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)
+                essentialKnowledges?.get(selectedItemPositionEsentials!!)
                     ?.criterion?.get(field!!)
             _Evidence.value = selectedItem?.evidence
             _KeyActivity.value = selectedItem?.keyActivity
@@ -91,6 +94,32 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
             _OptionFour.value = question?.options?.get(3)
         }
 
+    val _OptionsItems = MutableLiveData<List<String>>()
+    fun fetchSpinnerOptionsItems(): LiveData<List<String>> {
+        _OptionsItems.value = arrayListOf("Knowledge", "Product", "Performance")
+        return _OptionsItems
+    }
+
+    var selectedItemOptcion = MutableLiveData<Int>().value
+        set(value) {
+            field = value
+            when (field) {
+                0 -> {
+                    essentialKnowledges = standard?.knowledge?.essentialKnowledges
+                    _EssentialKnowledgeItems.value = essentialKnowledges
+                }
+                1 -> {
+                    essentialKnowledges = standard?.product?.essentialKnowledges
+                    _EssentialKnowledgeItems.value = essentialKnowledges
+                }
+                2 -> {
+                    essentialKnowledges = standard?.performance?.essentialKnowledges
+                    _EssentialKnowledgeItems.value = essentialKnowledges
+                }
+            }
+
+        }
+
     private var questionPosition: Int? = null
 
     private var questions: List<Question>? = null
@@ -102,6 +131,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
             override fun getDataSuccessful(standard: Standard) {
                 this@EvaluationViewModel.standard = standard
                 this@EvaluationViewModel.knowledge = standard.knowledge
+                essentialKnowledges = knowledge?.essentialKnowledges
                 view?.loadSpinners()
             }
 
@@ -109,7 +139,6 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
                 Toast.makeText(getApplication(), "Error al cargar los datos", Toast.LENGTH_LONG)
                     .show()
             }
-
         }
         evaluationRepository?.getData(EvaluationActivity.id.id, callback)
     }
@@ -142,38 +171,46 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
     }
 
     fun deleteQuestion() {
-        knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+        essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
             selectedItemPositionCritetions!!
         )?.questions?.removeAt(questionPosition!!)
         previousQuestion()
     }
 
-    fun addQuestion(body: String, options: List<String>) {
+    fun addQuestion(body: String, options: List<String>, answer: Int) {
         val questions =
-            knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+            essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
                 selectedItemPositionCritetions!!
             )?.questions
         val question = Question()
         question.body = body
         question.options = options
+        question.answer = answer
         questions?.add(question)
     }
 
-    fun editQuestion(body: String, options: List<String>) {
+    fun editQuestion(body: String, options: List<String>, answer: Int) {
         val question = Question()
         question.body = body
         question.options = options
-        knowledge?.essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+        question.answer = answer
+        essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
             selectedItemPositionCritetions!!
         )?.questions?.set(questionPosition!!, question)
-        _Question.value = question?.body
-        _OptionOne.value = question?.options?.get(0)
-        _OptionTwo.value = question?.options?.get(1)
-        _OptionThree.value = question?.options?.get(2)
-        _OptionFour.value = question?.options?.get(3)
+        _Question.value = question.body
+        _OptionOne.value = question.options?.get(0)
+        _OptionTwo.value = question.options?.get(1)
+        _OptionThree.value = question.options?.get(2)
+        _OptionFour.value = question.options?.get(3)
     }
 
     fun setView(view: EvaluationActivity) {
         this@EvaluationViewModel.view = view
+    }
+
+    fun getSelectedQuestion(): Question? {
+        return essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
+            selectedItemPositionCritetions!!
+        )?.questions?.get(questionPosition!!)
     }
 }
