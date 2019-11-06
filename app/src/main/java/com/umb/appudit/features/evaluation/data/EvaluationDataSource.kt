@@ -7,12 +7,6 @@ interface EvaluationDataSource {
 
     fun getData(id: String, callback: Callback)
 
-    fun addQuestion(body: String, asnwers: ArrayList<String>)
-
-    fun editQuestion()
-
-    fun deleteQuestion()
-
     interface Callback {
 
         fun getDataSuccessful(standard: Standard)

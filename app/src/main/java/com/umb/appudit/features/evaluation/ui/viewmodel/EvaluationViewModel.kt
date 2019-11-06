@@ -8,11 +8,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.umb.appudit.features.evaluation.data.EvaluationDataSource
 import com.umb.appudit.features.evaluation.data.EvaluationRepository
-import com.umb.appudit.features.evaluation.data.entities.*
 import com.umb.appudit.features.evaluation.ui.EvaluationActivity
 import com.umb.appudit.features.standard.data.entities.Standard
 import android.widget.RadioGroup
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.umb.appudit.features.evaluation.data.entities.Criterion
+import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
+import com.umb.appudit.features.evaluation.data.entities.Knowledge
+import com.umb.appudit.features.evaluation.data.entities.Question
 
 
 class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication) {

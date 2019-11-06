@@ -1,13 +1,11 @@
 package com.umb.appudit.features.evaluation.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.umb.appudit.R
@@ -79,9 +77,6 @@ class EvaluationActivity : AppCompatActivity() {
             R.id.add_question -> addQuestion()
             R.id.edit_question -> editQuestion()
             R.id.delete_question -> deleteQuestion()
-        }
-        if (item.itemId == R.id.add_question) {
-
         }
         return true
     }
