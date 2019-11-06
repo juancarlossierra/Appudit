@@ -1,18 +1,24 @@
 package com.umb.appudit.features.evaluation.ui.viewmodel
 
+
 import android.app.Application
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
 import android.widget.Toast
+
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+
 import com.umb.appudit.features.evaluation.data.EvaluationDataSource
 import com.umb.appudit.features.evaluation.data.EvaluationRepository
-import com.umb.appudit.features.evaluation.data.entities.*
+import com.umb.appudit.features.evaluation.data.entities.Criterion
+import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
+import com.umb.appudit.features.evaluation.data.entities.Knowledge
+import com.umb.appudit.features.evaluation.data.entities.Question
 import com.umb.appudit.features.evaluation.ui.EvaluationActivity
 import com.umb.appudit.features.standard.data.entities.Standard
-import android.widget.RadioGroup
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
 
 
 class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication) {
@@ -113,8 +119,7 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
                 }
                 1 -> {
                     essentialKnowledges = standard?.product?.essentialKnowledges
-                    _EssentialKnowledgeItems.value = essentialKnowledges
-                }
+                    _EssentialKnowledgeItems.value = essentialKnowledges }
                 2 -> {
                     essentialKnowledges = standard?.performance?.essentialKnowledges
                     _EssentialKnowledgeItems.value = essentialKnowledges

@@ -1,11 +1,16 @@
 package com.umb.appudit.features.standard.data
 
+
+
 import android.content.Context
 import android.util.Log
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.umb.appudit.features.standard.data.entities.Standard
-import java.util.*
+import java.util.UUID
 import kotlin.collections.ArrayList
 
 class StandardRepository : StandardDataSource {
@@ -36,7 +41,7 @@ class StandardRepository : StandardDataSource {
     override fun getStandards(callback: StandardDataSource.GetDataCallback) {
         val standards = ArrayList<Standard>()
         val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+            override fun onDataChange(dataSnapshot: DataSnapshot){
                 dataSnapshot.children.forEach {a ->
                     a.getValue(Standard::class.java)?.let { standards.add(it) }
                 }
@@ -52,12 +57,7 @@ class StandardRepository : StandardDataSource {
     }
 
     override fun escribirDataNueva() {
-
-
-
-
-
-
+    
         var standard = Standard()
         standard.id = UUID.randomUUID().toString()
         standard.name = "estandar 1"
@@ -81,7 +81,5 @@ class StandardRepository : StandardDataSource {
         standard.version = "1.5.9"
         standard.definition =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus ante bibendum ipsum blandit, non fringilla turpis ullamcorper. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tempor suscipit arcu, ac bibendum odio. Etiam feugiat scelerisque lacinia. Integer eget ipsum imperdiet, placerat mauris quis, mollis enim. Duis at nisi lacus. Maecenas interdum volutpat leo sit amet eleifend. Integer risus nulla, consequat nec rutrum vel, accumsan vel libero. Mauris varius magna faucibus commodo posuere. Morbi malesuada"
-        databaseReference?.child(NODO)?.child(standard.id!!)?.setValue(standard)
-    }
-
+        databaseReference?.child(NODO)?.child(standard.id!!)?.setValue(standard)   }
 }

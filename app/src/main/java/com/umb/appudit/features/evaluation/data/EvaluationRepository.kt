@@ -1,14 +1,19 @@
 package com.umb.appudit.features.evaluation.data
 
+
+
 import android.content.Context
 import com.google.firebase.FirebaseApp
-import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.umb.appudit.features.evaluation.data.entities.Criterion
 import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
 import com.umb.appudit.features.evaluation.data.entities.Knowledge
-import com.umb.appudit.features.evaluation.data.entities.Question
 import com.umb.appudit.features.evaluation.ui.EvaluationActivity
 import com.umb.appudit.features.standard.data.entities.Standard
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class EvaluationRepository : EvaluationDataSource {
 
@@ -53,20 +58,16 @@ class EvaluationRepository : EvaluationDataSource {
             }
         }
         databaseReference?.child(NODO)?.addValueEventListener(postListener)
-
     }
 
     override fun addQuestion(body: String, asnwers: ArrayList<String>) {
-
     }
 
     override fun editQuestion() {
-
     }
 
     override fun deleteQuestion() {
-
-    }
+ }
 
     private fun initializeFireBase(context: Context) {
         FirebaseApp.initializeApp(context)
@@ -173,6 +174,4 @@ class EvaluationRepository : EvaluationDataSource {
         knowledge!!.essentialKnowledges = essentialKnowledges
         return knowledge
     }
-
-
 }

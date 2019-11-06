@@ -8,6 +8,4 @@ class Question {
 
     var answer: Int? = null
 
-    var asnwerSelected: Int? = null
-
-}
+    var asnwerSelected: Int? = null}

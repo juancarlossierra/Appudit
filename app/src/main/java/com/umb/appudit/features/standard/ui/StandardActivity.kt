@@ -1,7 +1,8 @@
 package com.umb.appudit.features.standard.ui
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.umb.appudit.R
 
 class StandardActivity : AppCompatActivity() {
