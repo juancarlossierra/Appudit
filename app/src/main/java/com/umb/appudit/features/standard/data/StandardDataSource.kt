@@ -6,8 +6,6 @@ interface StandardDataSource {
 
     fun getStandards(callback: GetDataCallback)
 
-    fun escribirDataNueva()
-
     interface GetDataCallback{
 
         fun getDataSuceSuccessfully(data: ArrayList<Standard>)

@@ -1,5 +1,6 @@
 package com.umb.appudit.features.evaluation.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -15,13 +16,15 @@ import com.umb.appudit.features.evaluation.data.entities.Knowledge;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressLint("ValidFragment")
 public class QuestionDialog2 extends Fragment {
 
     private String question;
-    private List<String> options;
+    private List options;
 
     public static Knowledge knowledge;
 
+    @SuppressLint("ValidFragment")
     public QuestionDialog2(final Context context, String buottonText) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

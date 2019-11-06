@@ -1,7 +1,6 @@
 package com.umb.appudit.features.evaluation.ui.viewmodel
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -12,7 +11,6 @@ import com.umb.appudit.features.evaluation.data.entities.*
 import com.umb.appudit.features.evaluation.ui.EvaluationActivity
 import com.umb.appudit.features.standard.data.entities.Standard
 import android.widget.RadioGroup
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 
 class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication) {
@@ -218,7 +216,6 @@ class EvaluationViewModel(aplication: Application) : AndroidViewModel(aplication
     }
 
     fun onSplitTypeChanged(radioGroup: RadioGroup, id: Int) {
-        Log.i("prueba", "prueba dato " + radioGroup.indexOfChild(radioGroup.findViewById(id)))
         var question = essentialKnowledges?.get(selectedItemPositionEsentials!!)?.criterion?.get(
             selectedItemPositionCritetions!!
         )?.questions?.get(questionPosition!!)
