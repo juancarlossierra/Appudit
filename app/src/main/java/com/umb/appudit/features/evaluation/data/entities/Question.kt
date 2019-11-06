@@ -1,5 +1,6 @@
 package com.umb.appudit.features.evaluation.data.entities
 
+
 class Question {
 
     var body: String? = null
@@ -8,6 +9,4 @@ class Question {
 
     var answer: Int? = null
 
-    var asnwerSelected: Int? = null
-
-}
+    var asnwerSelected: Int? = null}

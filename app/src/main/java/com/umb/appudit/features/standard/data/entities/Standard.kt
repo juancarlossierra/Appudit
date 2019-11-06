@@ -1,6 +1,6 @@
 package com.umb.appudit.features.standard.data.entities
 
-import com.umb.appudit.features.evaluation.data.entities.EssentialKnowledge
+
 import com.umb.appudit.features.evaluation.data.entities.Knowledge
 import com.umb.appudit.features.evaluation.data.entities.Performance
 import com.umb.appudit.features.evaluation.data.entities.Product

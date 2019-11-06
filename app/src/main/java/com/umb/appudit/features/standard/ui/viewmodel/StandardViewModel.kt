@@ -1,7 +1,6 @@
 package com.umb.appudit.features.standard.ui.viewmodel
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -40,6 +39,7 @@ class StandardViewModel(aplication: Application) : AndroidViewModel(aplication) 
 
 
     fun start() {
+
         repository = StandardRepository.getInstance(getApplication())
         val callback = object : StandardDataSource.GetDataCallback {
             override fun getDataSuceSuccessfully(data: ArrayList<Standard>) {
@@ -61,8 +61,5 @@ class StandardViewModel(aplication: Application) : AndroidViewModel(aplication) 
         return _StandardItems
     }
 
-    fun getSelectStandard():String{
-        return standardItems[this.selectedItemPosition!!].id.toString()
-    }
-
+    fun getSelectStandard():String{return standardItems[this.selectedItemPosition!!].id.toString() }
 }
