@@ -1,5 +1,6 @@
 package com.umb.appudit.features.evaluation.data.entities
 
+
 class Criterion {
 
     var description: String? = null

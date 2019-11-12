@@ -1,7 +1,8 @@
 package com.umb.appudit.features.evaluation.ui
 
+
 import android.app.Dialog
-import android.content.Context
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
@@ -97,6 +98,5 @@ class QuestionDialog(
             }
             dialog.dismiss()
         }
-
     }
 }

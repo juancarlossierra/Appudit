@@ -1,5 +1,6 @@
 package com.umb.appudit.features.standard.data
 
+
 import com.umb.appudit.features.standard.data.entities.Standard
 
 interface StandardDataSource {
@@ -10,8 +11,5 @@ interface StandardDataSource {
 
         fun getDataSuceSuccessfully(data: ArrayList<Standard>)
 
-        fun getDataError()
-
-    }
-
-}
+        fun getDataError() } 
+        }

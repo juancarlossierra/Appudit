@@ -1,11 +1,15 @@
 package com.umb.appudit.features.standard.data
 
+
 import android.content.Context
 import android.util.Log
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.umb.appudit.features.standard.data.entities.Standard
-import java.util.*
+import java.util.UUID
 import kotlin.collections.ArrayList
 
 class StandardRepository : StandardDataSource {
@@ -36,7 +40,7 @@ class StandardRepository : StandardDataSource {
     override fun getStandards(callback: StandardDataSource.GetDataCallback) {
         val standards = ArrayList<Standard>()
         val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+            override fun onDataChange(dataSnapshot: DataSnapshot){
                 dataSnapshot.children.forEach {a ->
                     a.getValue(Standard::class.java)?.let { standards.add(it) }
                 }
